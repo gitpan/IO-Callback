@@ -1,4 +1,4 @@
-# IO::Callback 1.00 t/sysread-params.t
+# IO::Callback 1.01 t/sysread-params.t
 # Check that IO::Callback's sysread() accurately emulates Perl's sysread(),
 # particularly in terms of parameter validation.
 
@@ -16,7 +16,7 @@ use Fatal qw/open close/;
 our $test_nowarnings_hook = $SIG{__WARN__};
 $SIG{__WARN__} = sub {
     my $warning = shift;
-    return if $warning =~ /^Use of uninitialized value \$(?:len|offset) in sysread/i;
+    return if $warning =~ /^Use of uninitialized value (?:\$(?:len|offset) )?in sysread/i;
     $test_nowarnings_hook->($warning);
 };
 
@@ -30,7 +30,7 @@ my @offset_values = (-1, -2, -3, -10, 0, 1, 2, 3, 10, undef); # offset param to 
 plan tests => 6 * @input_len_values * @buf_len_values * @len_values * @offset_values + 1;
 
 foreach my $input_len (@input_len_values) {
-    my $input = $input_len ? substr('qwerty123456789', 0, $input_len) : "";
+    my $input = substr 'qwerty123456789', 0, $input_len;
     write_file $tmpfile, $input;
     foreach my $buflen (@buf_len_values) {
         foreach my $include_undef_params (0, 1) {
@@ -45,7 +45,7 @@ foreach my $input_len (@input_len_values) {
                     my @results;
                     foreach my $fh ($iocode_fh, $real_fh) {
                         my $ret;
-                        my $buf = $buflen ? substr('QWERTYasdfghjkl', 0, $buflen) : "";
+                        my $buf = substr 'QWERTYasdfghjkl', 0, $buflen;
                         if ($include_undef_params or defined $offset) {
                             eval { $ret = sysread $fh, $buf, $len, $offset };
                         } else {

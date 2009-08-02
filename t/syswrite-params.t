@@ -1,4 +1,4 @@
-# IO::Callback 1.00 t/syswrite-params.t
+# IO::Callback 1.01 t/syswrite-params.t
 # Check that IO::Callback's syswrite() accurately emulates Perl's syswrite(),
 # particularly in terms of parameter validation.
 
@@ -35,7 +35,7 @@ foreach my $include_undef_params (0, 1) {
         foreach my $len (@len_values) {
             foreach my $offset (@offset_values) {
                 my $test_name = join ",", map {defined() ? $_ : 'undef'} ($include_undef_params, $input_len, $len, $offset);
-                my $input = $input_len ? substr($input_data, 0, $input_len) : "";
+                my $input = substr 'qwerty0987654321', 0, $input_len;
                 my $save_input = $input;
 
                 my $got_contents = '';

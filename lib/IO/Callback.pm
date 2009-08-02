@@ -9,15 +9,15 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =cut
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 =head1 SYNOPSIS
 
-C<IO::Callback> provides an easy way to produce a phoney read-only filehandle that calls back to your own code when it needs data to satisfy a read. This is useful if you want to use a library module that expects to read data from a filehandle, but you want the data to come from some other source, and there is too much data to read it all into memory and use L<IO::String> or similar.
+C<IO::Callback> provides an easy way to produce a phoney read-only filehandle that calls back to your own code when it needs data to satisfy a read. This is useful if you want to use a library module that expects to read data from a filehandle, but you want the data to come from some other source and you don't want to read it all into memory and use L<IO::String>.
 
     use IO::Callback;
 

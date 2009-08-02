@@ -1,4 +1,4 @@
-# IO::Callback 1.00 t/z9-read-variations.t
+# IO::Callback 1.01 t/z9-read-variations.t
 # Try many combinations of read operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 

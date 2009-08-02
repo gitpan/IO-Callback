@@ -1,5 +1,9 @@
 Revision history for IO::Callback
 
+1.01    2007-08-02
+        Minor doc tweaks.
+        Fixed failing test due to an uncaught warning under 5.8.8
+
 1.00    2007-08-01
         Renamed from IO::Coderef to IO::Callback
         Subclassed IO::String.

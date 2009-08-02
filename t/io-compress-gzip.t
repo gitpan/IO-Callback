@@ -1,4 +1,4 @@
-# IO::Callback 1.00 t/io-compress-gzip.t
+# IO::Callback 1.01 t/io-compress-gzip.t
 # Check that IO::Callback inter-operates with IO::Compress::Gzip
 
 use strict;
