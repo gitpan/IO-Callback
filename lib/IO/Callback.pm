@@ -9,11 +9,11 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.01
+Version 1.02
 
 =cut
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 =head1 SYNOPSIS
 
@@ -616,7 +616,7 @@ Fails to inter-operate with some library modules that read or write filehandles 
 
 =back
 
-Please report any other bugs or feature requests to C<bug-io-callback at rt.cpan.org>, or through
+Please report any other bugs or feature requests to C<bug- at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=IO::Callback>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 

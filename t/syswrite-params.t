@@ -1,4 +1,4 @@
-# IO::Callback 1.01 t/syswrite-params.t
+# IO::Callback 1.02 t/syswrite-params.t
 # Check that IO::Callback's syswrite() accurately emulates Perl's syswrite(),
 # particularly in terms of parameter validation.
 
@@ -16,7 +16,7 @@ use Fatal qw/open close/;
 our $test_nowarnings_hook = $SIG{__WARN__};
 $SIG{__WARN__} = sub {
     my $warning = shift;
-    return if $warning =~ /^Use of uninitialized value \$(?:len|offset) in syswrite/i;
+    return if $warning =~ /^Use of uninitialized value (?:\$(?:len|offset) )?in syswrite/i;
     $test_nowarnings_hook->($warning);
 };
 

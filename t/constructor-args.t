@@ -1,4 +1,4 @@
-# IO::Callback 1.01 t/constructor-args.t
+# IO::Callback 1.02 t/constructor-args.t
 # Check that invalid constructor args are caught
 # Check that extra constructor args are passed on to the callback
 

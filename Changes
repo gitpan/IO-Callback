@@ -1,32 +1,36 @@
 Revision history for IO::Callback
 
-1.01    2007-08-02
+1.02    2009-08-02
+        Fixed another test failure under 5.8
+        Corrected the dates in this file
+
+1.01    2009-08-02
         Minor doc tweaks.
         Fixed failing test due to an uncaught warning under 5.8.8
 
-1.00    2007-08-01
+1.00    2009-08-01
         Renamed from IO::Coderef to IO::Callback
         Subclassed IO::String.
         Allowed the callbacks to simulate non-fatal file I/O errors.
         Implemented setting $. and input_line_number().
         More tests, fixed offset handling in sysread().
 
-0.94    2007-07-30
+0.94    2009-07-30
         Added tests for ungetc, watched them fail, fixed it.
         Prevented extra callback call on double close of write handle.
         Made use of File::Slurp in the test suite.
 
-0.93    2007-07-29
+0.93    2009-07-29
         Even more tests.
         Pillaged some test scripts from IO::String.
         Added tell() support.
 
-0.92    2007-07-29
+0.92    2009-07-29
         More tests
 
-0.91    2007-07-28
+0.91    2009-07-28
         POD tweak
 
-0.90    2007-07-28
+0.90    2009-07-28
         Initial release.
 

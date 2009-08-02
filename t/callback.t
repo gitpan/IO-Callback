@@ -1,4 +1,4 @@
-# IO::Callback 1.01 t/callback.t
+# IO::Callback 1.02 t/callback.t
 # Check the interface to the callback coderef
 
 use strict;
