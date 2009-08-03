@@ -1,4 +1,4 @@
-# # IO::Callback 1.02 t/iostring-close.t
+# # IO::Callback 1.03 t/iostring-close.t
 # This is t/close.t from IO::String 1.08, adapted to IO::Callback.
 
 use strict;

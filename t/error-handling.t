@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/error-handling.t
+# IO::Callback 1.03 t/error-handling.t
 # Check that IO::Callback's error handling is consistent with the way Perl
 # handles errors on real files.
 
@@ -17,9 +17,6 @@ $SIG{__WARN__} = sub {
 };
 
 use IO::Callback;
-use File::Temp qw/tempdir/;
-
-our $tmpfile = tempdir(CLEANUP => 1) . "/testfile";
 
 # Closed files and writing on read files and visa versa
 my %code_for_operation = (

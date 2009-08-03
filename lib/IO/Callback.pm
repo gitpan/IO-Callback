@@ -9,11 +9,11 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.02
+Version 1.03
 
 =cut
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 =head1 SYNOPSIS
 
@@ -344,6 +344,7 @@ sub getline
     *$self->{R} or return $self->_ebadf;
     return if *$self->{Eof} || *$self->{Err};
     my $buf = *$self->{Buf};
+    $. = *$self->{lno};
 
     unless (defined $/) {  # slurp
         1 while $self->_doread;
@@ -516,6 +517,8 @@ sub printf
 sub getpos
 {
     my $self = shift;
+
+    $. = *$self->{lno};
     return *$self->{Pos};
 }
 *tell = \&getpos;

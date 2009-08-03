@@ -1,5 +1,9 @@
 Revision history for IO::Callback
 
+1.03    2009-08-03
+        Fix failing tests under 5.6.2
+        made tell() set $., to better mimic perl's behavior
+
 1.02    2009-08-02
         Fixed another test failure under 5.8
         Corrected the dates in this file

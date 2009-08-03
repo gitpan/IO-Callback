@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/z9-read-variations.t
+# IO::Callback 1.03 t/z9-read-variations.t
 # Try many combinations of read operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 
@@ -17,7 +17,6 @@ use Fcntl 'SEEK_CUR';
 
 our $testfile = tempdir(CLEANUP => 1) . "/testfile";
 
-our $read_dest;
 our %tell_result_sequence;
 our %lno_result_sequence;
 
@@ -70,11 +69,13 @@ sub run_test {
     my $testname = "$srccode $str $seglen/$do_ungetc";
 
     my $segs = segment_input($data_strings{$str}, $seglen);
+    $. = 999999;
     my $fh = IO::Callback->new('<', \&readsub, $segs);
     my $got_via_io_coderef = do_test_reads($fh, 1, map {$_->{CodeRef}} @readcode);
 
     # Use a real file to determine what the results should be with this combination
     # of read ops.
+    $. = 999999;
     open my $real_fh, "<", $file_holding_str;
     my $got_via_realfile = do_test_reads($real_fh, 0, map {$_->{CodeRef}} @readcode);
 
@@ -104,24 +105,26 @@ sub do_test_reads {
 
     # Use each read mechanism in turn, repeating the last until EOF.
     my $dest = '';
-    my @tell = ($mytell->($fh));
     my @lno = ($fh->input_line_number . "-" . $.);
+    my @tell = ($mytell->($fh));
+    push @lno, ($fh->input_line_number . "-" . $.); # verify tell-sets-$. behavior
     my $go = 1;
     while ($go and @coderefs > 1) {
         my $code = shift @coderefs;
         $code->($fh, \$dest) or $go = 0;
-        push @tell, $mytell->($fh);
         push @lno, $fh->input_line_number . "-" . $.;
+        push @tell, $mytell->($fh);
         if ($go and length $dest and $do_ungetc) {
             $fh->ungetc( ord(substr $dest, -1, 1, '') );
-            push @tell, $mytell->($fh);
             push @lno, $fh->input_line_number . "-" . $.;
+            push @tell, $mytell->($fh);
         }
     }
     while ($go and $coderefs[0]->($fh, \$dest)) {
-        push @tell, $mytell->($fh);
         push @lno, $fh->input_line_number . "-" . $.;
+        push @tell, $mytell->($fh);
     }
+    push @lno, $fh->input_line_number . "-" . $.;
     push @tell, $mytell->($fh);
     push @lno, $fh->input_line_number . "-" . $.;
 

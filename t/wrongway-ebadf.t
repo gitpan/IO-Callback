@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/wrongway-ebadf.t
+# IO::Callback 1.03 t/wrongway-ebadf.t
 # Check that reads on write filehandles (and visa versa) give EBADF errors, same as real files. 
 
 use strict;
@@ -16,8 +16,8 @@ use IO::Callback;
 # some bits of code for reading/writing the fh
 my @code_bits = grep {/\S/} split /\n/, <<'EOF';
 R $_ = <$fh>
-R my @foo = <$fh>
 R $_ = $fh->getline
+R my @foo = <$fh>
 R my @foo = $fh->getlines
 R $_ = $fh->getc 
 R $_ = $fh->ungetc(123) 
@@ -32,7 +32,7 @@ EOF
 
 plan tests => 4 * @code_bits + 1;
 
-our $fh;
+use vars qw/$fh/;
 
 # The tests to run with a read-only fh as $fh (checking that read ops
 # work and write ops fail with EBADF) as an array of coderefs.
@@ -64,7 +64,7 @@ EOF
             $code
             ok !\$no_error, q{'$code_bit' gave an error};
             ok \$!{EBADF}, 'errno set to EBADF';
-            ok \$fh->error, 'error flag set';
+            ok \$fh->error, "error flag set";
         }
 EOF
     if ($type eq "R") {

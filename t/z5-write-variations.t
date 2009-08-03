@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/z5-write-variations.t
+# IO::Callback 1.03 t/z5-write-variations.t
 # Try many combinations of write operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 
@@ -7,6 +7,13 @@ use warnings;
 
 use Test::More tests => 58043;
 use Test::NoWarnings;
+
+our $test_nowarnings_hook = $SIG{__WARN__};
+$SIG{__WARN__} = sub {
+    my $warning = shift;
+    return if $] < 5.008 and $warning =~ /Use of uninitialized value in scalar assignment/;
+    $test_nowarnings_hook->($warning);
+};
 
 use IO::Callback;
 use IO::Handle;
@@ -36,6 +43,7 @@ sub run_test {
     my (@writecode) = @_;
     $test_srccode = join "::", map {$_->{SrcCode}} @writecode;
 
+    $. = 999999;
     my $fh = IO::Callback->new('>', \&writesub);
     local $test_write_dest = '';
     do_test_writes($fh, 1, map {$_->{CodeRef}} @writecode);
@@ -49,6 +57,8 @@ sub run_test {
 
     # Check that the results are correct by applying the same sequence of
     # writes to a real file and comparing.
+    $. = 999999;
+    $fh = IO::Callback->new('>', \&writesub);
     open my $ref_fh, ">", $tmpfile;
     do_test_writes($ref_fh, 0,  map {$_->{CodeRef}} @writecode);
     close $ref_fh;

@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/syswrite-params.t
+# IO::Callback 1.03 t/syswrite-params.t
 # Check that IO::Callback's syswrite() accurately emulates Perl's syswrite(),
 # particularly in terms of parameter validation.
 

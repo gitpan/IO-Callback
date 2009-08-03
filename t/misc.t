@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/misc.t
+# IO::Callback 1.03 t/misc.t
 # Check that IO::Callback is consistent with real files in a few misc places.
 
 use strict;

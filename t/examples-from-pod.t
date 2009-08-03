@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/examples-from-pod.t
+# IO::Callback 1.03 t/examples-from-pod.t
 # Check that the examples in the POD work as described
 
 use strict;

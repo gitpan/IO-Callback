@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/file-copy.t
+# IO::Callback 1.03 t/file-copy.t
 # Check that IO::Callback inter-operates with File::Copy
 
 use strict;
@@ -8,6 +8,7 @@ use Test::More;
 BEGIN {
     eval 'use File::Copy qw/copy/';
     plan skip_all => 'File::Copy required' if $@;
+    plan skip_all => 'File::Copy too old' if $File::Copy::VERSION < 2.11;
 
     plan tests => 8;
 }

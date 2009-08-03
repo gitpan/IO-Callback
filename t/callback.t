@@ -1,4 +1,4 @@
-# IO::Callback 1.02 t/callback.t
+# IO::Callback 1.03 t/callback.t
 # Check the interface to the callback coderef
 
 use strict;
@@ -25,7 +25,7 @@ EOF
     is $got, "foobar", "recognised '$ret_eof' as EOF";
 }
 
-my $fh = IO::Callback->new("<", sub { return });
+our $fh = IO::Callback->new("<", sub { return });
 my $ret = read $fh, $_, 100;
 is $_, "", "empty string read if callback sends nothing";
 is $ret, 0, "0 len reported if callback sends nothing";
@@ -34,9 +34,15 @@ $fh = IO::Callback->new('<', sub { return IO::Callback::Error });
 $ret = read $fh, $_, 100;
 ok ! defined $ret, "error reported if read callback returns Error";
 $fh = IO::Callback->new('<', sub { return [] });
-throws_ok { read $fh, $_, 100 }
-    '/^unexpected reference type ARRAY returned by callback/',
-    "invalid read callback ref return trapped";
+SKIP: {
+    skip "perl too old", 1 if $] < 5.008;
+    # Running this under 5.6.2 causes the test script to exit with status 0,
+    # feels like an old perl bug.
+
+    throws_ok { read $fh, $_, 100 }
+        '/^unexpected reference type ARRAY returned by callback/',
+        "invalid read callback ref return trapped";
+};
 
 $fh = IO::Callback->new('>', sub { return IO::Callback::Error });
 $ret = print $fh "foo\n";
