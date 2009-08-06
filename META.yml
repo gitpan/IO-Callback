@@ -1,6 +1,6 @@
 ---
 name: IO-Callback
-version: 1.03
+version: 1.04
 author:
   - 'Dave Taylor <dave.taylor.cpan@gmail.com>'
 abstract: Emulate file interface for a code reference
@@ -17,13 +17,14 @@ build_requires:
   File::Slurp: 0
   File::Temp: 0
   IO::Handle: 0
+  Module::Build: 0
   Test::Exception: 0
   Test::More: 0
   Test::NoWarnings: 0
 provides:
   IO::Callback:
     file: lib/IO/Callback.pm
-    version: 1.03
+    version: 1.04
 generated_by: Module::Build version 0.280801
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

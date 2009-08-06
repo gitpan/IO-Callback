@@ -1,4 +1,4 @@
-# IO::Callback 1.03 t/z9-read-variations.t
+# IO::Callback 1.04 t/z9-read-variations.t
 # Try many combinations of read operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 
@@ -19,6 +19,13 @@ our $testfile = tempdir(CLEANUP => 1) . "/testfile";
 
 our %tell_result_sequence;
 our %lno_result_sequence;
+
+our $start_lineno = 999999;
+if ($] >= 5.008000 and $] < 5.008009) {
+    # $. sometimes gets 0ed at the tie() in IO::String::new() under
+    # these perls, start with $. set to 0 to avoid test failures.
+    $start_lineno = 0;
+}
 
 # the block size for the coderef to serve up data
 my @test_block_sizes = (1, 2, 3, 10, 1_000_000);
@@ -69,13 +76,13 @@ sub run_test {
     my $testname = "$srccode $str $seglen/$do_ungetc";
 
     my $segs = segment_input($data_strings{$str}, $seglen);
-    $. = 999999;
+    $. = $start_lineno;
     my $fh = IO::Callback->new('<', \&readsub, $segs);
     my $got_via_io_coderef = do_test_reads($fh, 1, map {$_->{CodeRef}} @readcode);
 
     # Use a real file to determine what the results should be with this combination
     # of read ops.
-    $. = 999999;
+    $. = $start_lineno;
     open my $real_fh, "<", $file_holding_str;
     my $got_via_realfile = do_test_reads($real_fh, 0, map {$_->{CodeRef}} @readcode);
 

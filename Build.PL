@@ -18,12 +18,13 @@ my $builder = Module::Build->new(
         'File::Slurp'      => 0,
         'File::Temp'       => 0,
         'IO::Handle'       => 0,
+        'Module::Build'    => 0,
         'Test::Exception'  => 0,
         'Test::More'       => 0,
         'Test::NoWarnings' => 0,
     },
     add_to_cleanup      => [ 'IO::Callback-*' ],
-    create_makefile_pl => 'traditional',
+    create_makefile_pl => 'small',
 );
 
 $builder->create_build_script();

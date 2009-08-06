@@ -1,4 +1,4 @@
-# IO::Callback 1.03 t/file-copy.t
+# IO::Callback 1.04 t/file-copy.t
 # Check that IO::Callback inter-operates with File::Copy
 
 use strict;

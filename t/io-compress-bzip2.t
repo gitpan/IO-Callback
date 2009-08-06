@@ -1,4 +1,4 @@
-# IO::Callback 1.03 t/io-compress-bzip2.t
+# IO::Callback 1.04 t/io-compress-bzip2.t
 # Check that IO::Callback inter-operates with IO::Compress::Bzip2
 
 use strict;

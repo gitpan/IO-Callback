@@ -1,4 +1,4 @@
-# IO::Callback 1.03 t/wrongway-ebadf.t
+# IO::Callback 1.04 t/wrongway-ebadf.t
 # Check that reads on write filehandles (and visa versa) give EBADF errors, same as real files. 
 
 use strict;
