@@ -1,11 +1,14 @@
-# IO::Callback 1.04 t/z9-read-variations.t
+
 # Try many combinations of read operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
+
+# This test is split into several .t files (one for each $seglen value), since the
+# large number of tests uses too much memory if run as a single .t file.
 
 use strict;
 use warnings;
 
-use Test::More tests => 495721;
+use Test::More tests => 99145;
 use Test::NoWarnings;
 
 use IO::Callback;
@@ -50,6 +53,8 @@ my %data_strings = (
     allbytes => join('', map {chr} (0..255)),
 );
 
+our $seglen;
+
 our $use_sysread;
 our $do_ungetc;
 foreach $use_sysread (0, 1) {
@@ -58,11 +63,9 @@ foreach $use_sysread (0, 1) {
         my @readcode = build_read_code($use_sysread, \@test_block_sizes);
         foreach my $str (keys %data_strings) {
             write_file $testfile, $data_strings{$str};
-            foreach my $seglen (@test_block_sizes) {
-                foreach my $readcode1 (@readcode) {
-                    foreach my $readcode2 (@readcode) {
-                        run_test($str, $testfile, $seglen, $readcode1, $readcode2);
-                    }
+            foreach my $readcode1 (@readcode) {
+                foreach my $readcode2 (@readcode) {
+                    run_test($str, $testfile, $seglen, $readcode1, $readcode2);
                 }
             }
         }
@@ -206,4 +209,6 @@ ENDCODE
 
     return @readcode;
 }
+
+1;
 

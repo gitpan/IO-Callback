@@ -1,5 +1,8 @@
 Revision history for IO::Callback
 
+1.05    2009-08-17
+        Reduce the memory footprint of the test suite
+
 1.04    2009-08-06
         Fix failing tests under 5.8.0 to 5.8.8
         

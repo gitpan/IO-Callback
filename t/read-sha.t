@@ -1,4 +1,4 @@
-# IO::Callback 1.04 t/read-sha.t
+# IO::Callback 1.05 t/read-sha.t
 # Check that IO::Callback inter-operates with Digest::SHA
 
 use strict;

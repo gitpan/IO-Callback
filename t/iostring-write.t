@@ -1,4 +1,4 @@
-# IO::Callback 1.04 t/iostring-write.t
+# IO::Callback 1.05 t/iostring-write.t
 # This is t/write.t from IO::String 1.08, adapted to IO::Callback.
 
 use strict;
