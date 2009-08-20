@@ -1,4 +1,4 @@
-# IO::Callback 1.05 t/sysread-params.t
+# IO::Callback 1.06 t/sysread-params.t
 # Check that IO::Callback's sysread() accurately emulates Perl's sysread(),
 # particularly in terms of parameter validation.
 

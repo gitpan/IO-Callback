@@ -8,7 +8,16 @@
 use strict;
 use warnings;
 
-use Test::More tests => 99145;
+our $seglen;
+
+use Test::More;
+BEGIN {
+    unless ($ENV{AUTHOR_TESTS} or $seglen == 1 or $seglen == 10) {
+        plan skip_all => "AUTHOR_TESTS environment variable not set",
+    }
+
+    plan tests => 99145;
+}
 use Test::NoWarnings;
 
 use IO::Callback;
@@ -52,8 +61,6 @@ my %data_strings = (
     para323  => "\n\n\nfoo\n\nbar\nbaz\n\n\n",
     allbytes => join('', map {chr} (0..255)),
 );
-
-our $seglen;
 
 our $use_sysread;
 our $do_ungetc;
