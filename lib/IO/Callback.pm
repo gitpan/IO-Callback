@@ -9,11 +9,11 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.06
+Version 1.07
 
 =cut
 
-our $VERSION = '1.06';
+our $VERSION = '1.07';
 
 =head1 SYNOPSIS
 
@@ -556,7 +556,9 @@ sub write
         croak "Negative length" if $len < 0;
         if (@_ > 2) {
             $off = $_[2] || 0;
-            croak "Offset outside string" if $off >= $slen and $off > 0;
+            if ( $off >= $slen and $off > 0 and ($] < 5.011 or $off > $slen) ) {
+                croak "Offset outside string";
+            }
             if ($off < 0) {
                 $off += $slen;
                 croak "Offset outside string" if $off < 0;

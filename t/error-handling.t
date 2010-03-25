@@ -1,4 +1,4 @@
-# IO::Callback 1.06 t/error-handling.t
+# IO::Callback 1.07 t/error-handling.t
 # Check that IO::Callback's error handling is consistent with the way Perl
 # handles errors on real files.
 
@@ -77,19 +77,19 @@ foreach my $rw ('>', '<') {
 my $fh = IO::Callback->new('<', sub {});
 
 throws_ok { $fh->getlines }
-    qr{^getlines\(\) called in scalar context at t/error-handling\.t line },
+    qr{^getlines\(\) called in scalar context at },
     "getlines() croaks in scalar context";
 
 throws_ok { seek $fh, 0, 0 }
-    qr{^Illegal seek at t/error-handling\.t line },
+    qr{^Illegal seek at },
     "seek croaks";
 
 throws_ok { $fh->setpos(1234) }
-    qr{^setpos not implemented for IO::Callback at t/error-handling\.t line },
+    qr{^setpos not implemented for IO::Callback at },
     "setpos croaks";
 
 throws_ok { $fh->truncate(1234) }
-    qr{^truncate not implemented for IO::Callback at t/error-handling\.t line },
+    qr{^truncate not implemented for IO::Callback at },
     "truncate croaks";
 
 is_deeply [stat $fh], [], "stat returns empty list";

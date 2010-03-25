@@ -1,4 +1,4 @@
-# IO::Callback 1.06 t/z5-write-variations.t
+# IO::Callback 1.07 t/z5-write-variations.t
 # Try many combinations of write operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 
