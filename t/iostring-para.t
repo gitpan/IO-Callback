@@ -1,4 +1,4 @@
-# IO::Callback 1.07 t/iostring-para.t
+# IO::Callback 1.08 t/iostring-para.t
 # This is t/para.t from IO::String 1.08, adapted to IO::Callback.
 
 use strict;

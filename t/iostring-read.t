@@ -1,4 +1,4 @@
-# IO::Callback 1.07 t/iostring-read.t
+# IO::Callback 1.08 t/iostring-read.t
 # This is t/read.t from IO::String 1.08, adapted to IO::Callback.
 
 use strict;

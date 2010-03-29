@@ -1,11 +1,11 @@
-# IO::Callback 1.07 t/z5-write-variations.t
+# IO::Callback 1.08 t/z5-write-variations.t
 # Try many combinations of write operations on an IO::Callback, checking that each
 # gives exactly the same results as Perl does for a real file.
 
 use strict;
 use warnings;
 
-use Test::More tests => 58043;
+use Test::More 'no_plan';
 use Test::NoWarnings;
 
 our $test_nowarnings_hook = $SIG{__WARN__};
@@ -29,6 +29,8 @@ our $test_srccode;
 
 our $tmpfile = tempdir(CLEANUP => 1) . "/testfile";
 
+our $tests_started_at = time();
+
 our $use_syswrite;
 foreach $use_syswrite (0, 1) {
     my @writecode = build_write_code($use_syswrite);
@@ -41,6 +43,20 @@ foreach $use_syswrite (0, 1) {
 
 sub run_test {
     my (@writecode) = @_;
+
+    # On some systems this test can take hours, I suspect sync on file
+    # close.
+    if (time() - $tests_started_at > 200 and not $ENV{AUTHOR_TESTS}) {
+        diag <<EOF;
+
+Abandoning write tests as they are taking too long.  This does not
+mean that IO::Callback has a problem, just that the large set of
+file writes that this test performs cannot be completed in a
+reasonable time on this platform.
+EOF
+        exit 0;
+    }
+
     $test_srccode = join "::", map {$_->{SrcCode}} @writecode;
 
     $. = 999999;

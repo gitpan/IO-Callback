@@ -1,4 +1,4 @@
-# IO::Callback 1.07 t/error-handling.t
+# IO::Callback 1.08 t/error-handling.t
 # Check that IO::Callback's error handling is consistent with the way Perl
 # handles errors on real files.
 

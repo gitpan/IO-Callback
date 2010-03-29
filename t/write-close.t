@@ -1,4 +1,4 @@
-# IO::Callback 1.07 t/write-close.t
+# IO::Callback 1.08 t/write-close.t
 # Check that IO::Callback deals correctly with the close of a write filehandle,
 # calling the callback with an empty argument.
 
