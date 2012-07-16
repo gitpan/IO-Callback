@@ -33,3 +33,4 @@ t/z9-read-variations-3.t
 t/z9-read-variations.ttmpl
 Makefile.PL
 META.yml
+META.json

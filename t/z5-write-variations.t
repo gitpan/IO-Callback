@@ -5,9 +5,21 @@
 use strict;
 use warnings;
 
-use Test::More 'no_plan';
-use Test::NoWarnings;
+use Test::More;
 
+BEGIN {
+    # On some systems this test can take hours, I suspect sync on file
+    # close.
+    if ($ENV{SLOW_TESTS}) {
+        plan 'no_plan';
+    }
+    else {
+        plan skip_all => 'SLOW_TESTS environment variable not set';
+    }
+
+}
+
+use Test::NoWarnings;
 our $test_nowarnings_hook = $SIG{__WARN__};
 $SIG{__WARN__} = sub {
     my $warning = shift;
@@ -41,21 +53,10 @@ foreach $use_syswrite (0, 1) {
     }
 }
 
+done_testing();
+
 sub run_test {
     my (@writecode) = @_;
-
-    # On some systems this test can take hours, I suspect sync on file
-    # close.
-    if (time() - $tests_started_at > 200 and not $ENV{AUTHOR_TESTS}) {
-        diag <<EOF;
-
-Abandoning write tests as they are taking too long.  This does not
-mean that IO::Callback has a problem, just that the large set of
-file writes that this test performs cannot be completed in a
-reasonable time on this platform.
-EOF
-        exit 0;
-    }
 
     $test_srccode = join "::", map {$_->{SrcCode}} @writecode;
 

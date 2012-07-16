@@ -9,11 +9,11 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.08
+Version 1.09_01
 
 =cut
 
-our $VERSION = '1.08';
+our $VERSION = '1.09_01';
 
 =head1 SYNOPSIS
 
@@ -661,12 +661,16 @@ L<IO::String>, L<IO::Stringy>, L<perlfunc/open>
 
 Adapted from code in L<IO::String> by Gisle Aas.
 
+=head1 MANITAINER
+
+This module is currently being maintained by Toby Inkster (TOBYINK)
+for bug fixes. No substantial changes or new features are planned.
+
 =head1 COPYRIGHT & LICENSE
 
 Copyright 1998-2005 Gisle Aas.
 
-Copyright 2009 Dave Taylor, all rights reserved.
-
+Copyright 2009-2010 Dave Taylor.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

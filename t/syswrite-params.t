@@ -73,6 +73,10 @@ foreach my $include_undef_params (0, 1) {
                 if ($want eq 'died' and $got =~ /^died/) {
                     $got = 'died';
                 }
+                if ($got =~ /\.$/ and $want !~ /\.$/) {
+                    chomp $want;
+                    $want .= ".\n";
+                }
                 is( $got, $want, "$test_name results same as real file" );
 
                 my $want_contents = read_file $tmpfile;
