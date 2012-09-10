@@ -1,5 +1,8 @@
 Revision history for IO::Callback
 
+1.10    2012-09-10  cpan:TOBYINK
+        No functional changes since 1.09_01.
+
 1.09_01 2012-07-16  cpan:TOBYINK
         Fix failing tests.
         Skip slower tests unless SLOW_TESTS environment variable set to true.

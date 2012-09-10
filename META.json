@@ -44,14 +44,14 @@
    "provides" : {
       "IO::Callback" : {
          "file" : "lib/IO/Callback.pm",
-         "version" : "1.09_01"
+         "version" : "1.10"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "1.09_01"
+   "version" : "1.10"
 }

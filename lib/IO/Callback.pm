@@ -9,11 +9,11 @@ IO::Callback - Emulate file interface for a code reference
 
 =head1 VERSION
 
-Version 1.09_01
+Version 1.10
 
 =cut
 
-our $VERSION = '1.09_01';
+our $VERSION = '1.10';
 
 =head1 SYNOPSIS
 
