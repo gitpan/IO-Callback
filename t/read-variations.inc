@@ -12,8 +12,8 @@ our $seglen;
 
 use Test::More;
 BEGIN {
-    unless ($ENV{SLOW_TESTS}) {
-        plan skip_all => "SLOW_TESTS environment variable not set",
+    unless ($ENV{EXTENDED_TESTING}) {
+        plan skip_all => "EXTENDED_TESTING environment variable not set",
     }
 
     plan tests => 99145;

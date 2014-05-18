@@ -10,11 +10,11 @@ use Test::More;
 BEGIN {
     # On some systems this test can take hours, I suspect sync on file
     # close.
-    if ($ENV{SLOW_TESTS}) {
+    if ($ENV{EXTENDED_TESTING}) {
         plan 'no_plan';
     }
     else {
-        plan skip_all => 'SLOW_TESTS environment variable not set';
+        plan skip_all => 'EXTENDED_TESTING environment variable not set';
     }
 
 }

@@ -8,7 +8,9 @@ use Test::More;
 BEGIN {
     eval 'use Digest::SHA';
     plan skip_all => 'Digest::SHA required' if $@;
-
+    plan skip_all => "Bad Digest::SHA"
+        if Digest::SHA->VERSION eq '5.89'
+        || Digest::SHA->VERSION eq '5.90';
     plan tests => 2;
 }
 use Test::NoWarnings;
