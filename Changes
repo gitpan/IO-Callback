@@ -1,5 +1,8 @@
 Revision history for IO::Callback
 
+1.12    2014-05-25  cpan:TOBYINK
+        No functional changes since 1.11_01.
+
 1.11_01 2014-05-18  cpan:TOBYINK
         Rename SLOW_TESTS environment variable to EXTENDED_TESTING in line with Lancaster Consensus.
         Skip t/read-sha.t for Digest::SHA 5.89 and 5.90.
